@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   it 'is valid with valid attributes' do
     user = build(:user)
     expect(user).to be_valid
   end
-  
+
   describe 'validations' do
     it 'is invalid without a name' do
       user = build(:user, name: nil)
@@ -19,7 +18,7 @@ RSpec.describe User, type: :model do
       expect(user).not_to be_valid
       expect(user.errors[:email]).to include("can't be blank")
     end
-    
+
     it 'is invalid without an age' do
       user = build(:user, age: nil)
       expect(user).not_to be_valid
@@ -43,7 +42,7 @@ RSpec.describe User, type: :model do
       expect(user).not_to be_valid
       expect(user.errors[:age]).to include("is not a number")
     end
-    
+
     it 'requires age to be greater than 18' do
       user = build(:user, age: 17)
       expect(user).not_to be_valid
