@@ -1,0 +1,31 @@
+<h1>Users</h1>
+
+
+<%= link_to 'Download CSV', download_csv_users_path(format: :csv), class: 'btn btn-primary' %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Age</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <%= form_with(model: user, url: user_path(user), method: :patch) do |form| %>
+          <td><%= user.id %></td>
+          <td><%= form.text_field :name %></td>
+          <td><%= form.email_field :email %></td>
+          <td><%= form.number_field :age %></td>
+          <td>
+            <%= form.submit "Update", class: 'btn btn-sm btn-primary' %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
